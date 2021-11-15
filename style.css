@@ -22,13 +22,16 @@ body {
   background-color: white;
   padding: 5px;
   font-size: 10px;
+  text-align: center;
 }
+
 .hidden {
-  display: none;
+  display: block;
 }
 
 .placeholder {
   font-size: 30px;
+  display: none;
 }
 
 .placeholder .row {
@@ -39,16 +42,46 @@ body {
 
 #clickme {
   margin-top: 30px;
-  padding: 5px 20px;
-  border-radius: 14px;
-  font-size: 25px;
-  align-items: center;
-  background-color: rgb(67, 67, 255);
-  color: white;
-  border: none;
 }
 
-.footer {
-  text-align: right;
-  margin-right: 25vw;
+.p2 {
+  align-content: center;
+  text-align: center;
+  margin-top: 20vh;
+}
+
+.p2 #heading {
+  background-color: aqua;
+  border: none;
+  animation: none;
+  border-radius: 20px;
+  padding: 5px 30px;
+  margin-bottom: 30px;
+}
+
+.p2 #display {
+  display: none;
+}
+
+.footer{
+  margin-top: 50px;
+  text-align:center;
+}
+
+#next{
+  margin-left: 50vw;
+}
+
+
+footer a {
+  text-decoration: none;
+}
+
+footer {
+  background-color: aqua;
+  padding: 7px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

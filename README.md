@@ -1,1 +1,1 @@
-Website for Modified RSA Algorithm Calculator
+Website for Encrypting and Decrypting a message using RSA algorithm by using Prime numbers.
