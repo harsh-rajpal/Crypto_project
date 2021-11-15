@@ -17,22 +17,67 @@
 <body>
     <div>
         <button type="button" class="btn btn-primary btn-lg">Generate Keys</button>
-        <h1>Enter two prime numbers</h1>
-        <div class="container">
+        <h2>Enter two prime numbers</h2>
+        <div class="container up">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <h4>P</h4>
                     <input type="number" />
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <h4>Q</h4>
                     <input type="number" />
                 </div>
             </div>
         </div>
-        <h5>*p and q should be greater than or equal to 11.</h5>
-        <button type="button" class="btn btn-secondary btn-lg">Calculate</button>
+        <h5 style="color: red;">*p and q should be greater than or equal to 11.</h5>
+        <div>
+            <input type="button" id="clickme" value="Calculate" />
+        </div>
+        <div id="displaytable" class="placeholder" style="margin-top: 30px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2" style="font-weight: bold;">Variable</div>
+                    <div class="col-2" style="font-weight: bold;">Value</div>
+                    <div class="col-2"style="font-weight: bold;">Name</div>
+                    <div class="col-2"style="font-weight: bold;">Formula</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">N</div>
+                    <div class="col-2"></div>
+                    <div class="col-2">modulus</div>
+                    <div class="col-2">N:P*Q</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">L</div>
+                    <div class="col-2"></div>
+                    <div class="col-2">length</div>
+                    <div class="col-2">L:(p-1)*(q-1)</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">E</div>
+                    <div class="col-2"></div>
+                    <div class="col-2">encry key</div>
+                    <div class="col-2">E</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">D</div>
+                    <div class="col-2"></div>
+                    <div class="col-2">decryp key</div>
+                    <div class="col-2">D*E mod L=1</div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
+    <div class="footer" style="margin-top: 40px;">
+        <!-- <button id="back">Back</button> -->
+        <button id="next">Next</button>
+    </div>
+
+    <script src="index.js"></script>
 </body>
 
 </html>
