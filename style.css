@@ -1,0 +1,22 @@
+* {
+  text-align: center;
+  margin-top: 10vh;
+  background-color: #beeddf;
+}
+
+h1 {
+  margin-top: 5vh;
+}
+
+.row {
+  justify-content: center;
+  text-align: center;
+}
+
+input {
+  width: 120px;
+  border-radius: 23px;
+  background-color: white;
+  padding: 5px;
+  font-size: 10px;
+}
