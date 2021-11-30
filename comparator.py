@@ -1,3 +1,4 @@
+#importing all libraries required to show our outcomes in graphical format. 
 import pandas as pd
 import matplotlib.pyplot as plt
 import itertools

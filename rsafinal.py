@@ -1,20 +1,20 @@
 import random
 
-
+#defining GCD Function.
 def gcd(x, y):
     if y == 0:
         return x
     else:
         return gcd(y, x % y)
 
-
+#defining mod inverse function
 def mod_inverse(x, y):
     x = x % y
     for i in range(1, y):
         if (x*i) % y == 1:
             return i
 
-
+#defining encryption function
 def encrypt(p, q, msg):
     n = p*q
     phi_n = (p-1)*(q-1)
@@ -32,7 +32,7 @@ def encrypt(p, q, msg):
     ct_str = "".join(ct_arr)
     return n, phi_n, e, d, ct, ct_str
 
-
+#Defining decryption function.
 def decrypt(d, n, ct_str):
     ct = [ord(i) for i in ct_str]
     pt = [pow(i, d, n) for i in ct]
