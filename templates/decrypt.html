@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA ALGORITHM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #beeddf;
+        }
+
+        .main {
+            text-align: center;
+            margin-top: 10vh;
+        }
+
+        .main h2 {
+            margin: 30px 0;
+        }
+
+        .up .row {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .up input,
+        #text {
+            width: 120px;
+            border-radius: 23px;
+            background-color: white;
+            padding: 5px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        #text {
+            width: 200px;
+        }
+
+        #plaintext {
+            background-color: white;
+            border-radius: 23px;
+            width: 50%;
+            height: 40px;
+            font-size: 1rem;
+            margin: auto;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .hidden {
+            display: block;
+        }
+
+        .placeholder {
+            font-size: 30px;
+            display: none;
+        }
+
+        .placeholder .row {
+            justify-content: center;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        #clickme {
+            margin-top: 30px;
+        }
+
+        footer {
+            background-color: aqua;
+            padding: 7px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h2>ENHANCED RSA DECRYPTION</h2>
+        <h3>Enter the keys</h3>
+        <div class="container up">
+            <div class="row">
+                <div class="col-2">
+                    <h4>D</h4>
+                    <input type="number" id="d" />
+                </div>
+                <div class="col-2">
+                    <h4>N</h4>
+                    <input type="number" id="n" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3>Enter a message to decrypt</h3>
+        <input type="text" id="text">
+        <div>
+            <input class="btn btn-primary btn-lg" type="button" id="clickme" value="Decrypt" />
+        </div>
+        <br>
+        <div id="plaintext"></div>
+    </div>
+    <br>
+    <footer></footer>
+    <script>
+        var click = document.getElementById('clickme');
+        click.addEventListener('click', myfunction);
+        var pt_str = ""
+        function myfunction() {
+            var d = document.querySelector('#d').value
+            var n = document.querySelector('#n').value
+            var ct = document.querySelector('#text').value
+            fetch('/enhancedrsadecrypt', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    "d": d,
+                    "n": n,
+                    "ct": ct
+                })
+            }).then(function (response) {
+                return response.text();
+            }).then(function (text) {
+                const obj = JSON.parse(text)
+                pt_str = obj.pt_str
+                document.querySelector('#plaintext').innerHTML = pt_str
+            });
+        };
+
+    </script>
+
+</body>
+
+</html>

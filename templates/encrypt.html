@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSA ALGORITHM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #beeddf;
+        }
+
+        .main {
+            text-align: center;
+            margin-top: 10vh;
+        }
+
+        .main h2 {
+            margin: 30px 0;
+        }
+
+        .up .row {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .up input,
+        #text {
+            width: 120px;
+            border-radius: 23px;
+            background-color: white;
+            padding: 5px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        #text {
+            width: 200px;
+        }
+
+        #ciphertext {
+            background-color: white;
+            border-radius: 23px;
+            width: 50%;
+            height: 40px;
+            font-size: 1rem;
+            margin: auto;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .hidden {
+            display: block;
+        }
+
+        .placeholder {
+            font-size: 30px;
+            display: none;
+        }
+
+        .placeholder .row {
+            justify-content: center;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        #clickme {
+            margin-top: 30px;
+        }
+
+        footer {
+            background-color: aqua;
+            padding: 7px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h2>ENHANCED RSA ENCRYPTION</h2>
+        <h3>Enter two prime numbers</h3>
+        <div class="container up">
+            <div class="row">
+                <div class="col-2">
+                    <h4>P</h4>
+                    <input type="number" id="p" />
+                </div>
+                <div class="col-2">
+                    <h4>Q</h4>
+                    <input type="number" id="q" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3>Enter a message to encrypt</h3>
+        <input type="text" id="text">
+        <div>
+            <input class="btn btn-primary btn-lg" type="button" id="clickme" value="Encrypt" />
+        </div>
+        <br>
+        <div id="ciphertext"></div>
+        <div id="displaytable" class="placeholder" style="margin-top: 30px;">
+            <div class="container up">
+                <div class="row">
+                    <div class="col-2" style="font-weight: bold;">Variable</div>
+                    <div class="col-2" style="font-weight: bold;">Value</div>
+                    <div class="col-2" style="font-weight: bold;">Name</div>
+                    <div class="col-2" style="font-weight: bold;">Formula</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">N</div>
+                    <div class="col-2" id="n"></div>
+                    <div class="col-2">modulus</div>
+                    <div class="col-2">N:P*Q</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">L</div>
+                    <div class="col-2" id="l"></div>
+                    <div class="col-2">euler's totient</div>
+                    <div class="col-2">L:(p-1)*(q-1)</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">E</div>
+                    <div class="col-2" id="e"></div>
+                    <div class="col-2">public exponent</div>
+                    <div class="col-2">E</div>
+                </div>
+                <div class="row">
+                    <div class="col-2">D</div>
+                    <div class="col-2" id="d"></div>
+                    <div class="col-2">private exponent</div>
+                    <div class="col-2">D*E mod L=1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <footer class="placeholder"></footer>
+    <script>
+        var click = document.getElementById('clickme');
+        click.addEventListener('click', myfunction);
+        var n = 0
+        var l = 0
+        var e = 0
+        var d = 0
+        var ct = 0
+        var ct_str = ""
+        function myfunction() {
+            var p = document.querySelector('#p').value
+            var q = document.querySelector('#q').value
+            var pt = document.querySelector('#text').value
+            // send request to python script here
+            fetch('/enhancedrsaencrypt', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    "p": p,
+                    "q": q,
+                    "pt": pt
+                })
+            }).then(function (response) {
+                return response.text();
+            }).then(function (text) {
+                var tablewrap = document.getElementById('displaytable');
+                tablewrap.className += "hidden";
+                const footer = document.querySelector('footer');
+                footer.className += "hidden";
+                const obj = JSON.parse(text)
+                n = obj.n
+                l = obj.l
+                e = obj.e
+                d = obj.d
+                ct = obj.ct
+                ct_str = obj.ct_str
+                document.querySelector('#ciphertext').innerHTML = ct_str
+                document.querySelector('#n').innerHTML = n
+                document.querySelector('#l').innerHTML = l
+                document.querySelector('#e').innerHTML = e
+                document.querySelector('#d').innerHTML = d
+            });
+        }
+    </script>
+</body>
+
+</html>
